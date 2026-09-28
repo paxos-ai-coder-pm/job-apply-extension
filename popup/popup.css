@@ -1,0 +1,419 @@
+/* ===== CSS Variables ===== */
+:root {
+  --blue: #2563eb;
+  --blue-light: #dbeafe;
+  --blue-dark: #1d4ed8;
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --red: #dc2626;
+  --red-light: #fee2e2;
+  --yellow: #ca8a04;
+  --yellow-light: #fef9c3;
+  --gray: #6b7280;
+  --gray-light: #f3f4f6;
+  --gray-border: #e5e7eb;
+  --text: #111827;
+  --text-muted: #6b7280;
+  --white: #ffffff;
+  --radius: 6px;
+  --shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 4px 6px rgba(0, 0, 0, 0.07), 0 2px 4px rgba(0, 0, 0, 0.05);
+  --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 380px;
+  min-height: 200px;
+  font-family: var(--font);
+  font-size: 13px;
+  color: var(--text);
+  background: var(--white);
+}
+
+/* ===== Container ===== */
+.container {
+  width: 380px;
+  max-height: 600px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== Header ===== */
+header {
+  background: var(--blue);
+  color: var(--white);
+  padding: 12px 16px 0;
+  flex-shrink: 0;
+}
+
+header h1 {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  margin-bottom: 10px;
+}
+
+/* ===== Tabs ===== */
+.tabs {
+  display: flex;
+  gap: 2px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 7px 10px;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius) var(--radius) 0 0;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.tab-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: var(--white);
+}
+
+.tab-btn.active {
+  background: var(--white);
+  color: var(--blue);
+  font-weight: 600;
+}
+
+/* ===== Main Content ===== */
+main {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* ===== Tab Panels ===== */
+.tab-panel {
+  display: none;
+  padding: 14px 16px;
+  animation: fadeIn 0.15s ease;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Profile Form ===== */
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.form-group label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.form-input {
+  width: 100%;
+  padding: 6px 9px;
+  border: 1px solid var(--gray-border);
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text);
+  background: var(--white);
+  transition: border-color 0.15s, box-shadow 0.15s;
+  resize: vertical;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px var(--blue-light);
+}
+
+.form-input::placeholder {
+  color: #9ca3af;
+}
+
+textarea.form-input {
+  min-height: 56px;
+  line-height: 1.4;
+}
+
+/* ===== Form Sections ===== */
+.form-section {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--gray-border);
+}
+
+.form-section h3 {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+/* ===== PDF Upload Section ===== */
+.pdf-upload-section {
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--gray-border);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ===== Buttons ===== */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 16px;
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  border-radius: var(--radius);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
+  transition: background 0.15s, transform 0.1s;
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+  background: var(--blue-dark);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 14px;
+  background: var(--white);
+  color: var(--blue);
+  border: 1.5px solid var(--blue);
+  border-radius: var(--radius);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-secondary:hover {
+  background: var(--blue-light);
+}
+
+/* ===== Status Messages ===== */
+.status-msg {
+  font-size: 12px;
+  min-height: 16px;
+  padding: 2px 0;
+  transition: opacity 0.3s;
+}
+
+.status-msg.success {
+  color: var(--green);
+}
+
+.status-msg.error {
+  color: var(--red);
+}
+
+.status-msg.info {
+  color: var(--blue);
+}
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%) translateY(0);
+  background: #1f2937;
+  color: var(--white);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: var(--shadow-lg);
+  z-index: 999;
+  transition: opacity 0.3s, transform 0.3s;
+}
+
+.toast.hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(8px);
+}
+
+/* ===== Keyword Chips ===== */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 2px 2px;
+}
+
+.chip.matched,
+.chip-green {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.chip.missing,
+.chip-red {
+  background: var(--red-light);
+  color: var(--red);
+}
+
+.chip.neutral {
+  background: var(--gray-light);
+  color: var(--gray);
+}
+
+/* ===== ATS Score Bar ===== */
+.score-bar {
+  width: 100%;
+  height: 10px;
+  background: var(--gray-border);
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 8px 0;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: 5px;
+  transition: width 0.5s ease;
+}
+
+.score-fill.high {
+  background: var(--green);
+}
+
+.score-fill.medium {
+  background: var(--yellow);
+}
+
+.score-fill.low {
+  background: var(--red);
+}
+
+.score-label {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text);
+  line-height: 1;
+}
+
+.score-sublabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* ===== ATS Panel ===== */
+#ats-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ===== Autofill Tab ===== */
+.hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+
+kbd {
+  display: inline-block;
+  padding: 1px 5px;
+  background: var(--gray-light);
+  border: 1px solid var(--gray-border);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-family: monospace;
+  color: var(--text);
+}
+
+/* ===== Scrollbar ===== */
+main::-webkit-scrollbar {
+  width: 4px;
+}
+
+main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+main::-webkit-scrollbar-thumb {
+  background: var(--gray-border);
+  border-radius: 2px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background: var(--gray);
+}
+
+/* ===== Sections / Cards ===== */
+.card {
+  background: var(--gray-light);
+  border-radius: var(--radius);
+  padding: 10px 12px;
+}
+
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+/* ===== Chip list ===== */
+.chip-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}

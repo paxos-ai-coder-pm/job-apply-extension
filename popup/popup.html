@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Apply Assistant</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Job Apply</h1>
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="profile">Profile</button>
+        <button class="tab-btn" data-tab="ats">ATS Score</button>
+        <button class="tab-btn" data-tab="autofill">Auto-fill</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Profile Tab -->
+      <div class="tab-panel active" id="panel-profile">
+        <div id="profile-form-container"></div>
+        <div class="pdf-upload-section">
+          <label for="pdf-input" class="btn-secondary">Upload Resume PDF</label>
+          <input type="file" id="pdf-input" accept=".pdf" style="display:none">
+          <div id="pdf-status" class="status-msg"></div>
+        </div>
+        <button class="btn-primary" id="save-profile-btn">Save Profile</button>
+        <div id="save-status" class="status-msg"></div>
+      </div>
+
+      <!-- ATS Tab -->
+      <div class="tab-panel" id="panel-ats">
+        <div id="ats-panel"></div>
+      </div>
+
+      <!-- Auto-fill Tab -->
+      <div class="tab-panel" id="panel-autofill">
+        <p class="hint">Click the button below to fill the active tab's form with your profile data, or use <kbd>Ctrl+Shift+F</kbd>.</p>
+        <button class="btn-primary" id="fill-form-btn">Fill Form on Active Tab</button>
+        <div id="fill-status" class="status-msg"></div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

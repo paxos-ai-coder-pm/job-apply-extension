@@ -1,0 +1,82 @@
+{
+  "version": 1,
+  "tasks": [
+    {
+      "id": "scaffold",
+      "title": "Scaffold manifest and folders",
+      "agent": "dev-1",
+      "deps": [],
+      "description": "Create manifest.json, README.md, icons/, background/service-worker.js, lib/schema.js"
+    },
+    {
+      "id": "popup-ui",
+      "title": "Popup HTML/CSS shell",
+      "agent": "dev-1",
+      "deps": ["scaffold"],
+      "description": "Create popup/popup.html, popup/popup.css, popup/popup.js, popup/profile-form.js"
+    },
+    {
+      "id": "profile-storage",
+      "title": "Profile storage wrapper",
+      "agent": "dev-1",
+      "deps": ["scaffold"],
+      "description": "Implement lib/storage.js with getProfile/saveProfile/getResumeText/saveResumeText/onProfileChanged"
+    },
+    {
+      "id": "pdf-extraction",
+      "title": "PDF text extraction via pdf.js",
+      "agent": "dev-1",
+      "deps": ["scaffold", "profile-storage"],
+      "description": "Vendor pdfjs-dist files, implement lib/pdf-extract.js, wire popup file input"
+    },
+    {
+      "id": "ats-engine",
+      "title": "ATS scoring engine",
+      "agent": "dev-2",
+      "deps": ["scaffold"],
+      "description": "Implement lib/ats-engine.js (pure local scoring) and lib/ats-engine.test.js"
+    },
+    {
+      "id": "ats-ui",
+      "title": "ATS panel in popup",
+      "agent": "dev-2",
+      "deps": ["ats-engine", "popup-ui", "profile-storage"],
+      "description": "Implement popup/ats.js exporting initAtsPanel(rootEl)"
+    },
+    {
+      "id": "autofill-content",
+      "title": "Auto-fill content script + trigger",
+      "agent": "dev-2",
+      "deps": ["scaffold", "popup-ui"],
+      "description": "Implement content/field-matcher.js, content/autofill.js, popup/autofill-trigger.js"
+    },
+    {
+      "id": "test-api",
+      "title": "API/logic tests",
+      "agent": "tester-api",
+      "deps": ["pdf-extraction", "ats-engine", "autofill-content"],
+      "description": "Run node --test on ats-engine and field-matcher tests; verify storage and message contracts"
+    },
+    {
+      "id": "test-ui",
+      "title": "UI flow tests",
+      "agent": "tester-ui",
+      "deps": ["pdf-extraction", "ats-ui", "autofill-content"],
+      "description": "Code-review popup flows: profile save/persist, PDF upload, ATS score, auto-fill"
+    },
+    {
+      "id": "test-edge",
+      "title": "Edge and security tests",
+      "agent": "tester-edge",
+      "deps": ["pdf-extraction", "ats-ui", "autofill-content"],
+      "description": "Verify huge/corrupt PDFs, XSS prevention, chrome:// page handling, CSP compliance"
+    },
+    {
+      "id": "review",
+      "title": "Final review",
+      "agent": "reviewer",
+      "deps": ["test-api", "test-ui", "test-edge"],
+      "description": "Check MV3 compliance, permissions, contracts, all tests green. APPROVE or REQUEST CHANGES."
+    }
+  ]
+}
